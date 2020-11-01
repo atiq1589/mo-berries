@@ -11,7 +11,8 @@ class OrderLine(BaseModel):
 
   order = models.ForeignKey('order_system.order',
     verbose_name="Order",
-    on_delete=models.CASCADE
+    on_delete=models.CASCADE,
+    related_name='order_line'
   )
 
   pizza = models.ForeignKey('order_system.pizza',
