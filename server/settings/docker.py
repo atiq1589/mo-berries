@@ -3,10 +3,10 @@ from .base import *
 DATABASES = {
   "default": {
     "ENGINE": "django.db.backends.postgresql",
-    "NAME": "superadmin-db",
+    "NAME": "pizza-db",
     "USER": "postgres",
     "PASSWORD": 123456,
-    "HOST": "lmsdb",
+    "HOST": "db",
     "PORT": "5432",
   }
 }
