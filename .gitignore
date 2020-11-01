@@ -1,0 +1,7 @@
+bower_components
+__pycache__
+.vscode
+css/
+*.sqlite3
+/static/
+Dockerfile-*
