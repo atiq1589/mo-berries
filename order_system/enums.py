@@ -19,4 +19,15 @@ class PizzaSizeEnum(BaseEnum):
   SMALL = 'small' 
   MEDIUM = 'medium' 
   LARGE = 'large'
-  
+
+
+class OrderStatusEnum(BaseEnum):
+  """
+  Define Order Status
+  """
+
+  PENDING = 'pending'
+  CONFIRMED = 'confirmed'
+  IN_PROGRESS = 'in_progress' 
+  DELIVERED = 'delivered'
+  CANCELED = 'canceled'
