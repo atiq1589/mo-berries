@@ -16,7 +16,7 @@ class OrderSerializer(BaseModelSerializer):
   """
   Order Serializer
   """
-  order_line = serializers.PrimaryKeyRelatedField(many=True, queryset=OrderLine.objects.all())
+  order_line = serializers.PrimaryKeyRelatedField(many=True, queryset=OrderLine.objects.all(), required=False)
   class Meta:
     model = Order
     exclude = ('created_by', 'modified_by', 'created_at', 'modified_at')
