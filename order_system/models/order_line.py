@@ -1,6 +1,6 @@
 from django.db import models
 from order_system.base import BaseModel
-from order_system.enums import OrderStatusEnum
+from order_system.enums import OrderStatusEnum, PizzaFlavorEnum, PizzaSizeEnum
 from django.core.validators import MinValueValidator
 
 
@@ -15,9 +15,16 @@ class OrderLine(BaseModel):
     related_name='order_line'
   )
 
-  pizza = models.ForeignKey('order_system.pizza',
-    verbose_name="Pizza",
-    on_delete=models.PROTECT
+  flavor = models.CharField(
+    verbose_name="Pizza Flavors",
+    choices=PizzaFlavorEnum.to_tuple(), 
+    max_length=15
+  )
+
+  size = models.CharField(
+    verbose_name="Pizza Sizes",
+    choices=PizzaSizeEnum.to_tuple(), 
+    max_length=15
   )
 
   quantity = models.IntegerField(
@@ -26,8 +33,8 @@ class OrderLine(BaseModel):
   )
 
   def __str__(self):
-    return '{0} - {1} - {2}'.format(self.order, self.pizza, self.quantity)
+    return '{0} - {1} - {2} - {3}'.format(self.order, self.flavor, self.size, self.quantity)
 
   class Meta:
-    unique_together = (('order', 'pizza'),)
+    unique_together = (('order', 'flavor', 'size'),)
 
