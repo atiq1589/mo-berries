@@ -20,7 +20,7 @@ class Order(BaseModel):
   order_status = models.CharField(
     verbose_name="Order Status",
     choices=OrderStatusEnum.to_tuple(), 
-    default=OrderStatusEnum.PENDING,
+    default=OrderStatusEnum.PENDING.value,
     max_length=15
   )
 
