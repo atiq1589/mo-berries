@@ -1,7 +1,8 @@
 from order_system.seralizers import OrderSerializer, OrderLineSerializer
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from order_system.models import Order, OrderLine
-# Create your views here.
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 class OrderViewSet(viewsets.ModelViewSet):
   """
@@ -10,6 +11,9 @@ class OrderViewSet(viewsets.ModelViewSet):
 
   queryset = Order.objects.all()
   serializer_class = OrderSerializer
+  filter_backends = (filters.SearchFilter,DjangoFilterBackend,)
+  search_fields = ['customer_name', 'customer_address',]
+  filterset_fields = ('order_status',)
 
 
 class OrderLineViewSet(viewsets.ModelViewSet):
