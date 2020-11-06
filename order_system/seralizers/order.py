@@ -9,6 +9,19 @@ class OrderLineSerializer(BaseModelSerializer):
   """
   Order Line Serializer
   """
+  def validate_order_status(self, order):
+    if order.order_status == OrderStatusEnum.DELIVERED.value:
+      raise serializers.ValidationError(_("Order Already Delivered. You can't change already delivered order."))
+
+  def create(self, validated_data):
+    order = validated_data.get('order')
+    self.validate_order_status(order)
+    return super().create(validated_data)
+
+  def update(self, instance, validated_data):
+    self.validate_order_status(instance.order)
+    return super().update(instance, validated_data)
+
   class Meta:
     model = OrderLine
     exclude = ('created_by', 'modified_by', 'created_at', 'modified_at')
