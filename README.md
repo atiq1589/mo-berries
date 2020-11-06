@@ -30,6 +30,7 @@ You need **Python 3.8** installed
 1. now open your browser and type localhost:8000 to view the site.
 1. visit `localhost/admin` to  view django admin. before that please create super user.
 1. visit `localhost/api/v1/` to  view API list.
+1. Search: `localhost/api/v1/orders/?search=atiqul&order_status=confirmed`. Please note customer_name and customer_address are full text search. as a result you can pass customer name or customer address in `search` parameter.
 
 ## Set Environment variable
 
