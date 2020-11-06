@@ -30,3 +30,20 @@ class OrderTestCase(TestCase):
     self.assertEqual(response.status_code, status.HTTP_200_OK)
     self.assertEqual(len(response.data), 1)
     self.assertEqual(response.data[0].get('customer_name'), 'Md. Atiqul Islam')
+
+  def test_order_status_update(self):
+    """
+    Test order list get API
+    """
+    order = Order.objects.create(customer_name="Md. Atiqul Islam", customer_address="Dhaka, Bangladesh")
+    payload = dict(order_status='delivered')
+
+    response = self.client.patch('/api/v1/orders/{0}/'.format(order.id), payload, format='json')
+    self.assertEqual(response.status_code, status.HTTP_200_OK)
+    self.assertEqual(response.data.get('order_status', None), 'delivered')
+    
+    response = self.client.patch('/api/v1/orders/{0}/'.format(order.id), payload, format='json')
+
+    self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+    self.assertEqual(response.data[0], "Order Already Delivered. You can't change already delivered order.")
+    
